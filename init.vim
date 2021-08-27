@@ -15,14 +15,15 @@ inoremap (<cr> (<cr>)<c-o><s-o>
 
 au BufRead,BufNewFile *.ino,*.pde set filetype=cpp
 
-filetype off
+"filetype off
 
 call plug#begin('~/.vim/plugged')
 Plug 'coddingtonbear/neomake-platformio'
-Plug 'prabirshrestha/vim-lsp'
+"Plug 'prabirshrestha/vim-lsp'
 "Plug 'ludovicchabant/vim-gutentags'
-Plug 'Shougo/deoplete.nvim'
-Plug 'lighttiger2505/deoplete-vim-lsp'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'Shougo/deoplete.nvim'
+"Plug 'lighttiger2505/deoplete-vim-lsp'
 "Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'jackguo380/vim-lsp-cxx-highlight'
 
@@ -31,7 +32,7 @@ call plug#end()
 if executable('ccls')
    au User lsp_setup call lsp#register_server({
       \ 'name': 'ccls',
-      \ 'cmd': {server_info->['ccls']},
+      \ 'cmd': {server_info->['ccls --log-file=vmi.log']},
       \ 'root_uri': {server_info->lsp#utils#path_to_uri(
       \   lsp#utils#find_nearest_parent_file_directory(
       \     lsp#utils#get_buffer_path(), ['.ccls', 'compile_commands.json']))},
@@ -75,13 +76,13 @@ augroup lsp_install
 augroup END
 
 
-hi LspCxxHlSymFunctionParameterNone ctermfg=LightRed guifg=LightRed cterm=none gui=none
+hi LspCxxHlSymParameter ctermfg=LightRed guifg=LightRed cterm=none gui=none
 
-hi LspCxxHlSymFunctionVariableNone ctermfg=LightCyan guifg=LightYellow cterm=none gui=none
+hi LspCxxHlSymLocalVariable ctermfg=LightCyan guifg=Orange cterm=none gui=none
 
 hi LspCxxHlSymField ctermfg=Brown guifg=Brown
 
-hi LspCxxHlSymFileVariableNone ctermfg=DarkBlue guifg=LightMagenta cterm=bold gui=bold
+hi LspCxxHlSymVariable ctermfg=DarkBlue guifg=Blue cterm=bold gui=bold
 
 "let  g:gutentags_ctags_tagfile = '.tags'
 "let  s:vim_tags = expand('~/.cache/tags')
@@ -91,5 +92,4 @@ hi LspCxxHlSymFileVariableNone ctermfg=DarkBlue guifg=LightMagenta cterm=bold gu
 "let  g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 
 let g:deoplete#enable_at_startup = 1
-
 
