@@ -7,10 +7,14 @@ set expandtab
 set clipboard=unnamedplus
 set foldmethod=syntax
 set nofoldenable
+set mouse=a
 
 inoremap {<cr> {<cr>}<c-o><s-o>
-inoremap [<cr> [<cr>]<c-o><s-o>
-inoremap (<cr> (<cr>)<c-o><s-o>
+inoremap [ []<Left>
+inoremap ( ()<Left>
+noremap <silent> <C-S>          :update<CR>
+vnoremap <silent> <C-S>         <C-C>:update<CR>
+inoremap <silent> <C-S>         <C-O>:update<CR>
 
 
 au BufRead,BufNewFile *.ino,*.pde set filetype=cpp
